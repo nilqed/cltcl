@@ -26,11 +26,16 @@
 ;; Paul Griffioen 2008-2014
 ;; ----------------------------------------------------------------------------
 
+;; completed for use by quicklisp / nilqed 25-AUG-2016  
+
 (in-package :cl-user)
 
 (asdf:defsystem "cltcl"
-  :version "0.0.0"
+  :version "0.0.1"
   :serial t
+  :description "Embed Tcl/Tk scripts in Common Lisp"
+  :author "Paul Griffioen"
+  :license "MIT, see file LICENSE"
   :components ((:file "package")
 	       (:file "cltcl")
 	       (:file "communication")

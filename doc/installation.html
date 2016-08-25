@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="clTcl : Embed Tcl/Tk scripts in Common Lisp">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>clTcl Installation</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/lisper99/cltcl">View on GitHub</a>
+
+          <h1 id="project_title">clTcl</h1>
+          <h2 id="project_tagline">Embed Tcl/Tk scripts in Common Lisp</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/lisper99/cltcl/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/lisper99/cltcl/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+<h2 id="requirements">Requirements</h2>
+
+<p>The package does not depend on any other package.</p>
+
+<p>No particular requirements for the Tcl/Tk interpreter exist.</p>
+
+<p>The clTcl package is currently ported to CLISP, Lucid, Allegro, SBCL,
+CMU, Clozure CL and LispWorks, and should be easily ported to other
+Common Lisp implementations as well. The only implementation dependent
+part is starting the interpreter and setting up a two way stream to
+it. See function <a href="dictionary.html#open-tcl/tk-stream">open-Tcl/Tk-stream</a> for details.</p>
+
+<h2 id="installing-cltcl">Installing clTcl</h2>
+
+<p>You have to install the clTcl package, get a Tcl/Tk interpreter and
+tell the clTcl package were the interpreter is located. On a lot of
+systems the Wish interpreter is already installed in /usr/bin/wish but
+even in that case you might want to choose a different one.</p>
+
+<p>You can download the package from GitHub. It contains all sources, an
+ASDF system definition file and an alternative system definition file
+that works for example for LispWorks. Just extract the sources from
+the archive and load the system in your own prefered way.</p>
+
+<h2 id="connecting-to-an-interpreter">Connecting to an interpreter</h2>
+
+<p>Use keyword :interpreter to connect to an interpreter. For example</p>
+
+<pre><code>(cltcl:event-loop
+  #TCL[button .b -text Exit -command exit
+       pack .b]
+  :interpreter "/home/paul/.my-runtimes/tclkit85-linux-x86")
+</code></pre>
+
+<p>or change the default interpreter by setting
+<a href="dictionary.html#*interpreter*">*interpreter*</a></p>
+
+<pre><code>(setf cltcl:*interpreter* "/home/paul/.my-runtimes/tclkit85-linux-x86")
+</code></pre>
+
+<p>Argument :interpreter eventually gets passed to
+<a href="dictionary.html#open-tcl/tk-stream">open-Tcl/Tk-stream</a>. The exact meaning of this keyword is
+implementation dependent but the general idea is that :interpreter
+points to the executable of the interpreter. Keyword :options is
+available for command line options.</p>
+
+<p>The default value for the :interpreter keyword is
+<a href="dictionary.html#*interpreter*">*interpreter*</a> and its default value is /usr/bin/wish.</p>
+
+<h2 id="choosing-a-tcltk-interpreter">Choosing a Tcl/Tk interpreter</h2>
+
+<p>Tcl/Tk is available for many systems in many forms. Visit the <a href="http://www.tcl.tk/software/tcltk/">Tcl
+Developer Xchange software page</a> for an overview. Popular
+binaries are <a href="http://www.activestate.com/activetcl">ActiveState’s ActiveTcl distribution</a>.</p>
+
+<h3 id="system-install">System Install</h3>
+
+<p>A Tcl/Tk interpreter can be installed system wide. On Unixy systems it
+is often installed. Type <code>wish</code> on the command line to test if it is
+available.</p>
+
+<p>If a Wish (or any other) interpreter is pre-installed you can simply
+connect to it as explained in the previous section. If it installed as
+/usr/bin/wish, which is clTcl’s default, it even works out of the box.</p>
+
+<p>If Wish is not pre-installed you can download
+<a href="http://www.activestate.com/activetcl">ActiveTcl</a>. You can for example install Wish 8.5 for
+Windows and connect to it with :interpreter “wish85”</p>
+
+<h3 id="standalone-executable">Standalone Executable</h3>
+
+<p>An interpreter can also be run as standalone executable. The advantage
+is that you have full control over the Tcl/Tk version your application
+uses. Your application is unaffected when the system installed
+interpreter changes. It is also ideal for deployment</p>
+
+<p>Download <a href="http://www.activestate.com/activetcl">ActiveTcl</a> and follow instructions on these pages
+to choose an interpreter. No installation is required; just find the
+interpreter executable and place it anywhere you like. Connect to it
+as explained in the previous section.</p>
+
+<h2 id="testing-you-installation">Testing you installation</h2>
+
+<p>You can test you installation with non-exported function
+test. Command:</p>
+
+<pre><code>CL-USER&gt; (cltcl::test :interpreter "/home/paul/tclkit85-linux-x86")
+</code></pre>
+
+<p>displayed the following dialog on my system</p>
+
+<div style="text-align: center;">
+	<img class="rfloat" src="images/tclkit85-linux-x86.png" alt="Dialog displaying information about the clTcl setup." />
+</div>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<p>Global <a href="dictionary.html#*trace-level*">*trace-level*</a> is for
+troubleshooting. Set it to 1 to see all of clTcl’s communication
+logged to *trace-output*. Set it to 2 to see more details.</p>
+
+<p>Function test accepts keyword :trace-level that sets
+<a href="dictionary.html#*trace-level*">*trace-level*</a> for you. Running</p>
+
+<pre><code> (cltcl::test :trace-level 2)
+</code></pre>
+
+<p>is an easy way to troubleshoot installation problems.</p>
+
+<p>Running test with :trace-level 1 should produce something like the
+following on *trace-output*</p>
+
+<pre><code>Handshaking...
+-&gt; Sending handshake script
+&lt;- Reply: Tcl/Tk at your service. Version 8.5
+Handshake okay
+Setting up Tcl/Tk side...
+-&gt; Running script of 12 commands
+&lt;- Incoming :reply
+Tcl/Tk side ready
+-&gt; Running script of 3 commands
+&lt;- Incoming :reply
+&lt;- Incoming :event
+Calling event handler MACHINE-TYPE
+-&gt; Sending reply
+&lt;- Incoming :event
+Calling event handler MACHINE-VERSION
+-&gt; Sending reply
+&lt;- Incoming :event
+Calling event handler SOFTWARE-TYPE
+-&gt; Sending reply
+&lt;- Incoming :event
+Calling event handler SOFTWARE-VERSION
+-&gt; Sending reply
+&lt;- Incoming :event
+Calling event handler LISP-IMPLEMENTATION-TYPE
+-&gt; Sending reply
+&lt;- Incoming :event
+Calling event handler LISP-IMPLEMENTATION-VERSION
+-&gt; Sending reply
+Listener signing off
+</code></pre>
+
+<p>If you want to see how messages are sent exactly you can trace
+function <a href="dictionary.html#send-script">send</a>.</p>
+
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">clTcl maintained by <a href="https://github.com/lisper99">lisper99</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-5527808-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

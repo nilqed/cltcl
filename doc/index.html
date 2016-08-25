@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="clTcl : Embed Tcl/Tk scripts in Common Lisp">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>clTcl</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/lisper99/cltcl">View on GitHub</a>
+
+          <h1 id="project_title">clTcl</h1>
+          <h2 id="project_tagline">Embed Tcl/Tk scripts in Common Lisp</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/lisper99/cltcl/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/lisper99/cltcl/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Tcl/Tk provides a powerful GUI library with a BSD-style open source
+license. It is a combination of the scripting language Tcl and the
+cross-platform widget toolkit Tk.</p>
+
+<p>Package clTcl provides an interface to Tcl/Tk via Tcl scripts embedded
+into Common Lisp. Program your GUI with Tcl as embedded
+language. Scripts can be run by choosing one of the various Tcl/Tk
+interpreters. Deployment is possible for many systems.</p>
+
+<h2 id="hello-world">Hello World</h2>
+
+<p>The following fragment is the obligatory Hello World.</p>
+
+<pre><code>(cltcl:event-loop
+  #TCL[package require Tk
+       wm protocol . WM_DELETE_WINDOW {exit}
+       label .message -text "Hello World!"
+       pack .message])
+</code></pre>
+
+<p>Function event-loop starts the Tcl/Tk interpreter, executes the given
+script and starts listening for events to dispatch. It is typically
+used as application top loop.</p>
+
+<p>The Tcl script is embedded with syntax <code>#TCL[ ... ]</code>. At the dots any
+literal Tcl script can occur.</p>
+
+<h2 id="documentation">Documentation</h2>
+
+<p>The <a href="installation.html">installation page</a> describes the requirements,
+installing clTcl, choosing a Tcl/Tk interpreter, troubleshooting.</p>
+
+<p>The <a href="manual.html">manual</a> explains how to use the clTcl package. All
+functions are <a href="specification.html">specification</a> of the clTcl package.</p>
+
+<p>Finally there are some <a href="examples.html">examples</a>.</p>
+
+<h2 id="status">Status</h2>
+
+<p>I have run it successfully with ABCL, CLISP, SBCL, LispWorks, CCL and
+CMU on GNU/Linux and with ABCL, CCL, CLISP and LispWorks on
+Windows. All combinations worked for various Tcl/Tk
+interpreters. Other implementations and combinations should work
+without many problems.</p>
+
+<h2 id="links">Links</h2>
+
+<ul>
+  <li>An excellent Tcl tutorial is <a href="http://philip.greenspun.com/tcl/">Tcl for Web Nerds</a> by
+Abelson, Greenspun and Sandon.</li>
+  <li>Many Tcl/Tk resources can be found at the <a href="http://tcl.tk/">Tcl Developer
+Xchange</a> and the <a href="http://wiki.tcl.tk/">Tclers Wiki</a>.</li>
+  <li>Documentation for all Tcl and Tk commands can be found on the
+Developer Xchange manual pages. See for example the manuals pages
+for <a href="http://www.tcl.tk/man/tcl8.4/contents.htm">Tcl/Tk 8.4</a>, <a href="http://www.tcl.tk/man/tcl8.5/contents.htm">Tcl/Tk 8.5</a> and <a href="http://www.tcl.tk/man/tcl8.6/contents.htm">Tcl/Tk
+8.6</a>.</li>
+</ul>
+
+<h2 id="license">License</h2>
+
+<p>This software has an MIT license.</p>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">clTcl maintained by <a href="https://github.com/lisper99">lisper99</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-5527808-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+
