@@ -28,8 +28,9 @@
 
 (in-package "CL-USER")
 
-;; Define Tcl interpreter ((added by nilqed 25-AUG-2016) )
-(defparameter *wish* "C:/Tcl/bin/wish86.exe")  
+;; Define Tcl interpreter ((added by nilqed 25-AUG-2016) )  
+(defparameter *wish* "C:/Tcl/bin/wish86.exe")    ;; Windows
+; (defparameter *wish* "/usr/bin/wish")          ;; Unix
 
 (defun CLPV (&KEY (INTERPRETER CLTCL:*INTERPRETER*) OPTIONS)
   "Runs the Common Lisp Package Viewer."
