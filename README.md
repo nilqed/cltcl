@@ -23,7 +23,7 @@ probably have to adjust the following paths at the top of the file:
 
 See http://lisper99.github.io/cltcl/examples.html.
 
-`Loadable from QuickLisp since ..... tbd`
+**Loadable from Quicklisp since 1-NOV-2016**
 
 ---
 
